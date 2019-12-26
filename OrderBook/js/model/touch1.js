@@ -291,6 +291,7 @@ var touch = function() {
         } else if (target == "end") {
             $(".upStart").css("display", "none");
             $(".upEnd").css("display", "block");
+            window.cancelAnimationFrame(requestId);
             //停止录音
         } else if (target == "play") {
             console.log("试听");
