@@ -1,0 +1,187 @@
+ .changeMove{
+ 	-webkit-animation: change 2000ms linear 2;
+ }
+ @-webkit-keyframes change{
+	0%{
+		-webkit-transform:rotate(0deg);
+	}
+	50%{
+		-webkit-transform:rotate(-180deg);
+	}
+	100%{
+		-webkit-transform:rotate(-360deg);
+	}
+  }
+ @-webkit-keyframes cdRotate{
+	0%{
+		-webkit-transform:rotate(0deg);
+	}
+	50%{
+		-webkit-transform:rotate(180deg);
+	}
+	100%{
+		-webkit-transform:rotate(360deg);
+	}
+  }
+  .book{
+  	-webkit-animation: downAndUp 1500ms linear infinite;
+  }
+  .cloud{
+  	-webkit-animation: downAndUp1 1500ms linear infinite;
+  }
+@-webkit-keyframes downAndUp{
+	0%,50%,100%{
+		-webkit-transform:translate(0,0);
+	}
+	25%{
+		-webkit-transform:translate(0,5px);
+	}
+	75%{
+		-webkit-transform:translate(0,-5px);
+	}
+  }
+  @-webkit-keyframes downAndUp1{
+	0%,50%,100%{
+		-webkit-transform:translate(0,0);
+	}
+	25%{
+		-webkit-transform:translate(0,-5px);
+	}
+	75%{
+		-webkit-transform:translate(0,5px);
+	}
+  }
+ .hide{
+	 -webkit-animation: hide1 500ms  ease-in-out;
+ }
+ @-webkit-keyframes hide1{
+	 0%{
+		 opacity: 1;
+	 }
+	 100%{
+		 opacity: 0;
+	 }
+ }
+  .show{
+    	-webkit-animation: show1 1000ms  ease-in-out;
+    }
+  @-webkit-keyframes show1{
+	0%{
+		opacity: 0;
+	}
+	 50%{
+		  opacity: 0;
+	  }
+	100%{
+		opacity: 1;
+	}
+  }
+ .loadShow{
+	 -webkit-animation: loadShow 500ms  ease-in-out;
+ }
+ @-webkit-keyframes loadShow{
+	 0%{
+		 opacity: 0;
+	 }
+	 100%{
+		 opacity: 1;
+	 }
+ }
+ .downToUp{
+	 -webkit-animation: downToUp 500ms ease-in-out;
+ }
+ @-webkit-keyframes downToUp{
+	 0%{
+		 -webkit-transform:translate(0,100%);
+		 transform:translate(0,100%);
+	 }
+	 100%{
+		 -webkit-transform:translate(0,0);
+		 transform:translate(0,0);
+	 }
+ }
+ .upToDown{
+	 -webkit-animation: upToDown 500ms ease-in-out;
+ }
+ @-webkit-keyframes upToDown{
+	 0%{
+		 -webkit-transform:translate(0,0);
+		 transform:translate(0,0);
+	 }
+	 100%{
+		 -webkit-transform:translate(0,-100%);
+		 transform:translate(0,-100%);
+	 }
+ }
+  .plane1{
+  	-webkit-animation: plane1 500ms linear;
+  }
+  @-webkit-keyframes plane1{
+	0%{
+		-webkit-transform:translate(-121px,111.5px) scale(2.5,2.5);
+		opacity: 0;
+	}
+	1%{
+		opacity: 1;
+	}
+	100%{
+		-webkit-transform:translate(0,0) scale(1,1);
+		opacity: 1;
+	}
+  }
+    .plane2{
+  	-webkit-animation: plane2 500ms linear;
+  }
+  @-webkit-keyframes plane2{
+	0%{
+		-webkit-transform:translate(-57px,53px) scale(1.5,1.5);
+		opacity: 0;
+	}
+	1%{
+		opacity: 1;
+	}
+	100%{
+		-webkit-transform:translate(0,0) scale(1,1);
+		opacity: 1;
+	}
+  }
+  .smallbook{
+  	-webkit-animation: smallbook 2000ms linear infinite;
+  }
+  @-webkit-keyframes smallbook{
+	0%{
+		-webkit-transform:translate(0,0);
+		}
+	25%{
+		-webkit-transform:translate(0,-10px);
+	}
+	50%{
+		-webkit-transform:translate(0,0);
+	}
+	75%{
+		-webkit-transform:translate(0,10px);
+	}
+	100%{
+		-webkit-transform:translate(0,0);
+	}
+  }
+  .smallbook1{
+  	-webkit-animation: smallbook1 2000ms linear infinite;
+  }
+  @-webkit-keyframes smallbook1{
+	0%{
+		-webkit-transform:translate(0,0);
+		}
+	25%{
+		-webkit-transform:translate(0,10px);
+	}
+	50%{
+		-webkit-transform:translate(0,0);
+	}
+	75%{
+		-webkit-transform:translate(0,-10px);
+	}
+	100%{
+		-webkit-transform:translate(0,0);
+	}
+  }

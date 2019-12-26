@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<title>趣约书</title>
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/animation.css" />
+	</head>
+
+	<body>
+		<div id="orientLayer" class="mod-orient-layer">
+			<div class="mod-orient-layer__content">
+				<i class="icon mod-orient-layer__icon-orient"></i>
+				<div class="mod-orient-layer__desc">为了更好的体验，请使用竖屏浏览</div>
+			</div>
+		</div>
+		<div id="box">
+			<div id="load">
+				<img src="css/img/page_1_002.png" />
+				<img src="css/img/page_1_003.png" />
+				<img src="css/img/page_1_004.png" />
+				<span>0%</span>
+				<img src="css/img/page_1_005.png" />
+			</div>
+		</div>
+		<script>
+            var game={
+                baseUrl:"css/",
+                openid:"<?php echo $openid; ?>",
+                title1:"趣约书",//标题
+                desc1:"一起去京东悦读节",//介绍
+                imgUrl1:"OrderBook/img/page_1_108.jpg"//图标
+            };
+		</script>
+		<script type="text/javascript" src="js/plugin/jquery.min.js"></script>
+		<script type="text/javascript" src="js/plugin/touchSwipe.min.js"></script>
+		<script type="text/javascript" src="js/model/config.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/model/function.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/model/loading.js" ></script>
+		<script type="text/javascript" src="js/model/index.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/model/touch1.js"></script>
+	</body>
+
+</html>
