@@ -171,7 +171,7 @@ var touch = function() {
             num = target.substr(target.length - 1, 1);
             tiaowidth = $("#tiao" + num + "").width();
             console.log("播放语音");
-            //$("#three"+num+"").attr("src","css/img/zhen/three.gif");
+            //$("#three"+num+"").attr("src","img/zhen/three.gif");
             startTimes = new Date().getTime();
             endtime =parseInt($("#time" + num + "").html()) ;
             timesChange();
@@ -181,7 +181,7 @@ var touch = function() {
                 if (times <= endtime*1000) {
                     var time = Math.ceil(times / 1000);
                     //三道线
-                    $("#three"+num+"").attr("src",game.baseUrl+"css/img/zhen/three_"+time%4+".png") ;
+                    $("#three"+num+"").attr("src",game.baseUrl+"img/zhen/three_"+time%4+".png") ;
 
                     $("#tiao" + num + "").css("width", (tiaowidth * time / endtime));
                     if(time<10){
@@ -280,7 +280,7 @@ var touch = function() {
                 if (times <= 60*1000) {
                     var time = Math.ceil(times / 1000);
                     //变换音符
-                    $("#music").attr("src","css/img/zhen/voice_"+(Math.ceil(times / 200)%3+1)+".png");
+                    $("#music").attr("src","img/zhen/voice_"+(Math.ceil(times / 200)%3+1)+".png");
                     if(time<10){
                         time="0"+time;
                     }
@@ -320,7 +320,7 @@ var touch = function() {
                 var times = endTimes - startTimesCh;
                 if (times <= 60*1000) {
                     var time = Math.ceil(times / 300);
-                    $("#chou").attr("src","css/img/zhen/chou_"+(time%4+1)+".png") ;
+                    $("#chou").attr("src","img/zhen/chou_"+(time%4+1)+".png") ;
                     chouId=requestAnimationFrame(timesChou);
                 }
             }
@@ -412,7 +412,7 @@ if(num==target.substr(target.length - 1, 1)){
     wx.playVoice({
         localId: dataList[num].id //需要播放的音频的本地ID，由stopRecord接口获得
     });
-    //$("#three"+num+"").attr("src","css/img/zhen/three.gif");
+    //$("#three"+num+"").attr("src","img/zhen/three.gif");
     startTimes = new Date().getTime();
     endtime =parseInt($("#time" + num + "").html()) ;
     timesChange();
@@ -422,7 +422,7 @@ if(num==target.substr(target.length - 1, 1)){
         if (times <= endtime*1000) {
             var time = Math.ceil(times / 1000);
             //三道线
-            $("#three"+num+"").attr("src","css/img/zhen/three_"+time%4+".png") ;
+            $("#three"+num+"").attr("src","img/zhen/three_"+time%4+".png") ;
 
             $("#tiao" + num + "").css("width", (tiaowidth * time / endtime));
             if(time<10){
