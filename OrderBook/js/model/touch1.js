@@ -115,7 +115,7 @@ var touch = function() {
             if(num){
                 $("#tiao" + num + "").css("width",tiaowidth);
                 $("#time" + num + "").html(endtime+'"');
-                $("#three"+num+"").attr("src","img/page_9_004.png");
+                $("#three"+num+"").attr("src","css/img/page_9_004.png");
                 console.log("结束语音播放");
                 //停止播放录音
             }
@@ -165,13 +165,13 @@ var touch = function() {
             if(num){
                 $("#tiao" + num + "").css("width",tiaowidth);
                 $("#time" + num + "").html(endtime+'"');
-                $("#three"+num+"").attr("src","img/page_9_004.png");
+                $("#three"+num+"").attr("src","css/img/page_9_004.png");
                 console.log("结束语音播放");
             }
             num = target.substr(target.length - 1, 1);
             tiaowidth = $("#tiao" + num + "").width();
             console.log("播放语音");
-            //$("#three"+num+"").attr("src","img/zhen/three.gif");
+            //$("#three"+num+"").attr("src","css/img/zhen/three.gif");
             startTimes = new Date().getTime();
             endtime =parseInt($("#time" + num + "").html()) ;
             timesChange();
@@ -181,7 +181,7 @@ var touch = function() {
                 if (times <= endtime*1000) {
                     var time = Math.ceil(times / 1000);
                     //三道线
-                    $("#three"+num+"").attr("src",game.baseUrl+"img/zhen/three_"+time%4+".png") ;
+                    $("#three"+num+"").attr("src",game.baseUrl+"css/img/zhen/three_"+time%4+".png") ;
 
                     $("#tiao" + num + "").css("width", (tiaowidth * time / endtime));
                     if(time<10){
@@ -190,7 +190,7 @@ var touch = function() {
                     $("#time" + num + "").html(time+'"');
                     requestAnimationFrame(timesChange);
                 }else {
-                    $("#three"+num+"").attr("src","img/page_9_004.png");
+                    $("#three"+num+"").attr("src","css/img/page_9_004.png");
                 }
             }
         }else if(target.indexOf("heart")>=0||target.indexOf("likeNum")>=0){
@@ -219,10 +219,10 @@ var touch = function() {
                 event.target.className="on";
             }
             if(nownum>0){
-                $("#heart"+likenum+"").attr("src","img/page_9_008.png");
+                $("#heart"+likenum+"").attr("src","css/img/page_9_008.png");
                 $("#likeNum"+likenum+"").css("color","#b34341");
             }else{
-                $("#heart"+likenum+"").attr("src","img/page_9_009.png");
+                $("#heart"+likenum+"").attr("src","css/img/page_9_009.png");
                 $("#likeNum"+likenum+"").css("color","#FFFFFF");
             }
         }
@@ -280,7 +280,7 @@ var touch = function() {
                 if (times <= 60*1000) {
                     var time = Math.ceil(times / 1000);
                     //变换音符
-                    $("#music").attr("src","img/zhen/voice_"+(Math.ceil(times / 200)%3+1)+".png");
+                    $("#music").attr("src","css/img/zhen/voice_"+(Math.ceil(times / 200)%3+1)+".png");
                     if(time<10){
                         time="0"+time;
                     }
@@ -319,7 +319,7 @@ var touch = function() {
                 var times = endTimes - startTimesCh;
                 if (times <= 60*1000) {
                     var time = Math.ceil(times / 300);
-                    $("#chou").attr("src","img/zhen/chou_"+(time%4+1)+".png") ;
+                    $("#chou").attr("src","css/img/zhen/chou_"+(time%4+1)+".png") ;
                     chouId=requestAnimationFrame(timesChou);
                 }
             }
@@ -389,7 +389,7 @@ touch();
 if(num==target.substr(target.length - 1, 1)){
     $("#tiao" + num + "").css("width",tiaowidth);
     $("#time" + num + "").html(endtime+'"');
-    $("#three"+num+"").attr("src","img/page_9_004.png");
+    $("#three"+num+"").attr("src","css/img/page_9_004.png");
     console.log("结束语音播放");
     //停止播放录音
     wx.stopVoice({
@@ -398,7 +398,7 @@ if(num==target.substr(target.length - 1, 1)){
 }else{
     $("#tiao" + num + "").css("width",tiaowidth);
     $("#time" + num + "").html(endtime+'"');
-    $("#three"+num+"").attr("src","img/page_9_004.png");
+    $("#three"+num+"").attr("src","css/img/page_9_004.png");
     console.log("结束语音播放");
     //停止播放录音
     wx.stopVoice({
@@ -411,7 +411,7 @@ if(num==target.substr(target.length - 1, 1)){
     wx.playVoice({
         localId: dataList[num].id //需要播放的音频的本地ID，由stopRecord接口获得
     });
-    //$("#three"+num+"").attr("src","img/zhen/three.gif");
+    //$("#three"+num+"").attr("src","css/img/zhen/three.gif");
     startTimes = new Date().getTime();
     endtime =parseInt($("#time" + num + "").html()) ;
     timesChange();
@@ -421,7 +421,7 @@ if(num==target.substr(target.length - 1, 1)){
         if (times <= endtime*1000) {
             var time = Math.ceil(times / 1000);
             //三道线
-            $("#three"+num+"").attr("src","img/zhen/three_"+time%4+".png") ;
+            $("#three"+num+"").attr("src","css/img/zhen/three_"+time%4+".png") ;
 
             $("#tiao" + num + "").css("width", (tiaowidth * time / endtime));
             if(time<10){
@@ -430,7 +430,7 @@ if(num==target.substr(target.length - 1, 1)){
             $("#time" + num + "").html(time+'"');
             requestAnimationFrame(timesChange);
         }else {
-            $("#three"+num+"").attr("src","img/page_9_004.png");
+            $("#three"+num+"").attr("src","css/img/page_9_004.png");
         }
     }
 
