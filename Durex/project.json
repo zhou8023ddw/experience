@@ -1,0 +1,31 @@
+{
+    "project_type": "javascript",
+
+    "debugMode" : 1,
+    "showFPS" : false,
+    "frameRate" : 60,
+    "noCache" : false,
+    "id" : "gameCanvas",
+    "renderMode" : 0,
+    "engineDir":"frameworks/cocos2d-html5",
+
+    "modules" : ["actions","core","labels","transitions"],
+
+    "jsList" : [
+        "src/resource.js",
+        "src/MyLoading.js",
+        "src/Config.js",
+        "src/unit/MyFunction.js",
+        "src/unit/Animate.js",
+        "src/unit/MusicLayer.js",
+        "src/main/MainScene.js",
+        "src/main/FlowerLayer.js",
+        "src/choose/ChooseScene.js",
+        "src/game/GameScene.js",
+        "src/game/PanelTopLayer.js",
+        "src/game/PanelBottomLayer.js",
+        "src/game/EvolutionLayer.js",
+        "src/game/TipLayer.js",
+        "src/game/LocationTipLayer.js"
+    ]
+}

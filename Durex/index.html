@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>全民抓喜鹊</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="full-screen" content="yes"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+    <style>
+        body, canvas, div {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            -khtml-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        #Cocos2dGameContainer {
+            z-index: 10;
+        }
+
+        #gameCanvas {
+            position: absolute;
+            z-index: 9;
+        }
+
+        #debug {
+            position: absolute;
+            background-color: black;
+            width: 100%;
+            height: 20px;
+            z-index: 100;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        #loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            /*display: none;*/
+        }
+
+        .loading {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        #loading_bg {
+            background: url("images/loading_bg.jpg") center center no-repeat;
+            background-size: auto 100%;
+        }
+
+        #loading_logo {
+            background: url("images/loading_logo.png") center center no-repeat;
+            background-size: auto 100%;
+        }
+
+        #loading_loading {
+            background: url("images/loading_loading.png") center center no-repeat;
+            background-size: auto 100%;
+            animation: fade 2s linear infinite;
+            -webkit-animation: fade 2s linear infinite;
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes fade {
+            0% {
+                opacity: 0;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        #loading_bird {
+            position: fixed;
+            width: 112px;
+            height: 95px;
+            background: url("images/loading_bird.png") center center no-repeat;
+            background-size: auto 100%;
+            animation: rotate 2s linear infinite;
+            -webkit-animation: rotate 2s linear infinite;
+            display: none;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg)
+            }
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        @-webkit-keyframes rotate {
+            0% {
+                -webkit-transform: rotate(0deg)
+            }
+            100% {
+                -webkit-transform: rotate(360deg)
+            }
+        }
+
+        #input {
+            display: none;
+        }
+
+        #input_background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 100;
+        }
+
+        #input_bg {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 100;
+        }
+
+        #input_button_confirm {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 101;
+        }
+
+        #input_button_give_up {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 101;
+        }
+
+        .input {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 102;
+            background-color: transparent;
+            border: 0;
+            outline: none;
+        }
+
+        #bird {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        #bird_1 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: url("images/bird_1.gif") center center no-repeat;
+            background-size: auto 100%;
+            left: 100px;
+            top: 100px;
+            z-index: 100;
+        }
+        #btn{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 320px;
+            height: 50px;
+            background: #bbbbbb;
+
+        }
+        #btn>div{
+            position: absolute;
+            width: 30px;
+            height:50px;
+            font-size: 15px;
+            color: aquamarine;
+
+        }
+    </style>
+</head>
+<body style="padding:0; margin: 0; background: white;">
+
+<!--<div id="debug">0</div>-->
+
+<div id="bird">
+    <!--<div id="bird_1"></div>-->
+</div>
+
+<div id="loading">
+    <div id="loading_bg" class="loading"></div>
+    <div id="loading_logo" class="loading"></div>
+    <div id="loading_loading" class="loading"></div>
+    <div id="loading_bird"></div>
+</div>
+<div id="input">
+    <div id="input_background"></div>
+    <input id="input_name" class="input">
+    <input id="input_address" class="input">
+    <input id="input_code" class="input">
+    <input id="input_phone" class="input">
+</div>
+
+<div id="map"></div>
+<div id="audio"></div>
+<canvas id="gameCanvas" width="480" height="720"></canvas>
+
+<script>
+    (function() {
+        var nav      = window.navigator;
+        var ua       = nav.userAgent.toLowerCase();
+        var uaResult = /android (\d+(?:\.\d+)+)/i.exec(ua) || /android (\d+(?:\.\d+)+)/i.exec(nav.platform);
+        if (uaResult) {
+            var osVersion    = parseInt(uaResult[1]) || 0;
+            var browserCheck = ua.match(/(qzone|micromessenger|qqbrowser)/i);
+            if (browserCheck) {
+                var gameCanvas = document.getElementById("gameCanvas");
+                var ctx        = gameCanvas.getContext('2d');
+                ctx.fillStyle  = '#000000';
+                ctx.fillRect(0, 0, 1, 1);
+            }
+        }
+    })();
+
+    document.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+    });
+
+    (function() {
+        var pixelRatio = window.devicePixelRatio || 1;
+        var ratioH     = window.innerHeight * pixelRatio / 1008;
+        var bird       = document.getElementById('loading_bird');
+
+        var w = 112 / pixelRatio * ratioH;
+        var h = 95 / pixelRatio * ratioH;
+
+        bird.style.left       = '50%';
+        bird.style.top        = String(435 / 1008 * 100) + '%';
+        bird.style.width      = w + 'px';
+        bird.style.height     = h + 'px';
+        bird.style.marginLeft = -(w / 2 - 55 / pixelRatio * ratioH) + 'px';
+        bird.style.marginTop  = -h / 2 + 'px';
+        bird.style.display    = 'block';
+    })();
+
+</script>
+
+<!--<script src="js/Sound.js"></script>-->
+<!--<script src="js/Map.js"></script>-->
+<!--<script src="http://api.map.baidu.com/api?v=2.0&ak=3WraGOGzCsLE8ZE9TTbEPHYMMaSKHPYx"></script>-->
+
+<script src="http://map.qq.com/api/js?v=2.exp&key=5UOBZ-E3GAX-7W34Q-TD44M-HUALQ-S3FAH&libraries=geometry,convertor"></script>
+
+
+<script>
+    var AVInit = false;
+    var analytics = false;
+
+    var textArr = [
+
+    ];
+
+    var Game = function() {
+        this.baseUrl = '';
+
+        this.gameLoadCount   = 0;
+        this.gameLoadedCount = 0;
+
+        this.isMusicOpened = true;
+
+        //进化状态 默认:null 成功:'success' 失败:'fail'
+        this.evolutionState = null;
+
+        //用户当前位置 百度坐标
+        this.lng = 116.4058662834;
+        this.lat = 39.9427362475;
+
+        //        this.lng = 116.4088;
+        //        this.lat = 39.9093;
+
+        this.hasUpdateUserLocation      = true;
+        this.hasUpdateOtherUserLocation = true;
+        this.hasUpdateBirdLocation      = true;
+
+        this.userPos      = null;
+        this.otherUserArr = [
+            {"lat": 39.9451362475, "long": 116.4099662834, "key": "67ce190d8783c739dba9994062300012", "type": "boy_other"},
+            {"lat": 39.9457362475, "long": 116.4097662834, "key": "67ce190d8783c739dba9994062300013", "type": "girl_other"}
+            //{"lat": 39.9437362475, "long": 116.4078662834, "key": "67ce190d8783c739dba9994062300014", "type": "boy_other"}
+        ];
+        this.birdArr      = [
+            {"lat": 39.9451362475, "long": 116.4098662834, "key": "67ce190d8783c739dba9994062300082", "type": "bird_1"},
+            {"lat": 39.9440362475, "long": 116.4108662834, "key": "67ce190d8783c739dba9994062300083", "type": "bird_2"},
+            {"lat": 39.9449362475, "long": 116.4118662834, "key": "67ce190d8783c739dba9994062300084", "type": "bird_3"},
+            {"lat": 39.9430362475, "long": 116.4128662834, "key": "67ce190d8783c739dba9994062300085", "type": "bird_4"}
+        ];
+
+        this.globalNumArr = [0, 0, 0];
+        this.myBirdNumArr = [0, 0, 0, 0];
+
+        //如果不是第一次玩 设置性别 'boy'||'girl' 赋值之后会直接进入游戏场景
+        this.mySex = 0;
+
+        this.catchRangeRadius = 0;
+
+        this.catchDistance = 100;
+
+        this.showFlowerInAndroid = false;
+
+        this.compassAngle = -1;
+
+        this.hasAllowedGetPosition = false;
+
+        this.showTransition = false;
+    };
+
+    Game.prototype = {
+        //加载进度回调
+        loadPercentCallback: function(count, loadedCount) {
+            console.log('加载进度 : ' + loadedCount + ' / ' + count);
+            this.gameLoadCount   = count;
+            this.gameLoadedCount = loadedCount;
+            this.updateLoader();
+        },
+
+        //加载完成回调
+        loadFinishCallback: function() {
+            console.log('加载完成');
+
+            document.getElementById('loading').style.display = 'none';
+
+            if (!this.sound) {
+                this.sound = new Sound(this.baseUrl, ['music_bg', 'effect_button']);
+                this.sound.initSound();
+                this.sound.audios['music_bg'].autoplay = true;
+                this.sound.audios['music_bg'].loop     = true;
+            }
+
+
+            if (!this.map) {
+                this.map = new Map(15, 17);
+                this.map.centerAndZoom(this.lng, this.lat, 17, false, function() {
+                    game.lat = game.map.center.lat;
+                    game.lng = game.map.center.lng;
+
+                    game.setGamer(1);
+
+                });
+            }
+
+
+            this.start();
+
+//            game.showInputLayer();
+
+        },
+
+        //场景初始化结束回调
+        initFinishCallback: function() {
+            console.log('初始化结束');
+
+            document.getElementById('loading').style.display = 'none';
+        },
+
+        //开始
+        start: function() {
+        },
+
+        //开始游戏回调
+        startGameCallback: function() {
+            console.log('开始游戏');
+        },
+
+        //更新加载进度
+        updateLoader: function() {
+            var percent = this.gameLoadedCount / this.gameLoadCount;
+
+            //            document.getElementById('loader_percent').innerText = Math.floor(percent * 100) + '%';
+        },
+
+        //播放音乐
+        playMusic: function(id) {
+            if (this.isMusicOpened) {
+                this.sound.playMusic(id);
+            }
+        },
+
+        //暂停播放
+        pauseMusic: function(id) {
+            this.sound.pauseMusic(id);
+        },
+
+        //播放音效
+        playEffect: function(id) {
+            if (this.isMusicOpened) {
+                this.sound.playEffect(id);
+            }
+        },
+
+        //统计
+        log: function(_name, attr) {
+            /*
+             统计项
+             调用示例:
+             log("appName_score",{score:123});
+             */
+            if (!attr) {
+                attr = {};
+            }
+            if (AV && !AVInit) {
+                analytics = AV.analytics({
+                    appId:   "D1WK0bubG5u9CcPWsyg3CgaE-gzGzoHsz",
+                    appKey:  "wjdKeqeKE1t0ouFdldTTSRIe",
+                    version: "1.8.6",
+                    channel: "h5_buyansu"
+                });
+                analytics.send({
+                            event:    _name,
+                            attr:     attr,
+                            duration: 1000
+                        },
+                        function(result) {
+                            console.log("init success");
+                        });
+                AVInit = true;
+            } else if (AV) {
+                analytics.send({
+                    event:    _name,
+                    attr:     attr,
+                    duration: 1000
+                }, function(result) {
+                    console.log("send success");
+                });
+            }
+        },
+
+        //设计分享语
+        setShare: function(title, text) {
+            $.SetShare(
+                    title,
+                    text,
+                    baseLink + para,
+                    this.baseUrl + 'images/icon.jpg',
+                    function() {
+                        //share timeline callback
+                        game.log(appName + "_time");
+                    },
+                    function() {
+                        //share friend callback
+                        game.log(appName + "_friend");
+                    }
+            );
+        },
+
+        //选择性别回调 'boy' : 1 || 'girl' : 2
+        chooseSexCallback: function(sex) {
+            console.log(sex);
+//                        this.setGamer(sex);
+        },
+
+        locationTipLayerCallback: function(callback) {
+
+        },
+
+        setGamer: function(sex) {
+            var type = sex === 1 ? 'boy' : 'girl';
+            if (!this.gamer) {
+                this.gamer = this.map.addOverlay('gamer', this.lng, this.lat, type);
+            }
+        },
+
+        //回到原位
+        pressBackButtonCallback: function() {
+            console.log('back');
+            this.map.centerAndZoom(this.lng, this.lat, 17, true);
+        },
+        pressRefreshButtonCallback:function(){
+//            window.location.href='';
+            console.log('刷新')
+
+        },
+        pressCatchButtonCallback: function() {
+            console.log('catch');
+        },
+
+        resetCatchRange: function() {
+            var pos1              = this.map.pointToPixel(this.lng, this.lat);
+            var pos2              = this.map.pointToPixel(this.lng + 0.0011730429 * this.catchDistance / 100, this.lat);
+            var distance          = this.getDistance(this.lng, this.lat, this.lng + 0.0011730429 * this.catchDistance / 100, this.lat);
+            this.catchRangeRadius = Math.abs(pos1.x - pos2.x) / (window.innerHeight / 1008);
+        },
+
+        //更新地图中的喜鹊
+        //更新地图中的喜鹊
+        updateBird: function() {
+
+            if(this.hasUpdateBirdLocation) {
+                this.hasUpdateBirdLocation = false;
+                this.getBird(this.map.center,function (points) {
+                    var birdArrTemp = game.birdArr.concat();
+
+                    for(var i = 0; i < points.length; i ++) {
+                        var birdi = points[i];
+
+                        var temp = true;
+                        for(var j = 0; j < birdArrTemp.length; j++) {
+                            var birdj = birdArrTemp[j];
+                            if (birdi.key === birdj.key) {
+                                birdj.updateCenter(new qq.maps.LatLng(birdi.lat,birdi.long));
+                                birdArrTemp.splice(j,1);
+                                temp = false;
+                                break;
+                            }
+                        }
+
+                        if(temp) {
+                            console.log("添加小鸟覆盖物");
+                            var birdOverlay = game.map.addOverlay(birdi.key,birdi.long,birdi.lat,'bird_'+birdi.type);
+                            birdOverlay.fid = birdi.fid || 0;
+                            game.birdArr.push(birdOverlay);
+                        }
+
+                    }
+
+                    for(var n = 0; n< birdArrTemp.length; n++) {
+                        var birdn = birdArrTemp[n];
+                        for(var k = 0; k < game.birdArr.length; k++) {
+                            var birdk = game.birdArr[k];
+                            if (birdn.key === birdk.key) {
+                                birdk.destroy();
+                                birdk = null;
+                                game.birdArr.splice(k,1);
+                                break;
+                            }
+                        }
+                    }
+
+                    game.hasUpdateBirdLocation = true;
+                });
+            }
+
+        },
+
+        //更新玩家位置
+        updateUserLocation: function(location) {
+            var self = this;
+
+            if (this.hasUpdateUserLocation) {
+                this.hasUpdateUserLocation = false;
+                var point                  = new BMap.Point(location.long, location.lat);
+                this.map.translate([point], function(data) {
+                    var point0 = data.points[0];
+                    self.lng   = point0.lng;
+                    self.lat   = point0.lat;
+
+                    self.hasUpdateUserLocation = true;
+
+                    self.userPos = self.map.translatePoint2Game(self.lng, self.lat);
+                });
+            }
+        },
+
+        //更新其他玩家的位置
+        updateOtherUserLocation: function() {
+            for (var i = 0; i < this.otherUserArr.length; i++) {
+                var otherUser = this.otherUserArr[i];
+                var pos       = this.map.translatePoint2Game(otherUser.long, otherUser.lat);
+                otherUser.x   = pos.x;
+                otherUser.y   = pos.y;
+            }
+        },
+
+        //更新某玩家的位置
+        updateOtherUserLocationByKey: function(userKey, location) {
+            for (var i = 0; i < this.otherUserArr.length; i++) {
+                var otherUser = this.otherUserArr[i];
+                if (otherUser.key === userKey) {
+                    var pos        = this.map.translatePoint2Game(location.long, location.lat);
+                    otherUser.long = location.long;
+                    otherUser.lat  = location.lat;
+                    otherUser.x    = pos.x;
+                    otherUser.y    = pos.y;
+
+                    break;
+                }
+            }
+        },
+
+        catchBirdCallback: function(key, callback) {
+            if (true) {
+                var status = Math.random() > 0 ? true : false;
+                callback(key, status);
+            }
+        },
+
+        getDistance: function(lng1, lat1, lng2, lat2) {
+            return this.map.getDistance(lng1, lat1, lng2, lat2);
+        },
+
+        evolutionSuccessCallback: function(type, data) {
+            //            window.location.href = 'http://durex.buyansu.com/go/redirect?fid=' + data.fid + '&key=' + data.key;
+        },
+
+        //显示表单层
+        showInputLayer: function() {
+            var ratioH = window.innerHeight / 1008;
+
+            var input_bg              = loader.imageArr['images/input_bg.png'].img.cloneNode(true);
+            input_bg.id               = 'input_bg';
+            input_bg.className        = 'input';
+            input_bg.style.width      = 510 * ratioH + 'px';
+            input_bg.style.height     = 344 * ratioH + 'px';
+            input_bg.style.marginLeft = -510 / 2 * ratioH + 'px';
+            input_bg.style.marginTop  = -344 / 2 * ratioH + 'px';
+
+            var input_button_confirm              = loader.imageArr['images/button_input_confirm.png'].img.cloneNode(true);
+            input_button_confirm.id               = 'input_button_confirm';
+            input_button_confirm.className        = 'input';
+            input_button_confirm.style.width      = 105 * ratioH + 'px';
+            input_button_confirm.style.height     = 54 * ratioH + 'px';
+            input_button_confirm.style.marginLeft = -(105 / 2 + 130) * ratioH + 'px';
+            input_button_confirm.style.marginTop  = -(54 / 2 - 110) * ratioH + 'px';
+
+            var input_button_give_up              = loader.imageArr['images/button_input_give_up.png'].img.cloneNode(true);
+            input_button_give_up.id               = 'input_button_give_up';
+            input_button_give_up.className        = 'input';
+            input_button_give_up.style.width      = 105 * ratioH + 'px';
+            input_button_give_up.style.height     = 54 * ratioH + 'px';
+            input_button_give_up.style.marginLeft = -(105 / 2 - 130) * ratioH + 'px';
+            input_button_give_up.style.marginTop  = -(54 / 2 - 110) * ratioH + 'px';
+
+            var input_name              = document.getElementById('input_name');
+            input_name.style.width      = 260 * ratioH + 'px';
+            input_name.style.height     = 35 * ratioH + 'px';
+            input_name.style.marginLeft = -80 * ratioH + 'px';
+            input_name.style.marginTop  = -127 * ratioH + 'px';
+            input_name.style.fontSize   = 24 * ratioH + 'px';
+
+            var input_address              = document.getElementById('input_address');
+            input_address.style.width      = 260 * ratioH + 'px';
+            input_address.style.height     = 35 * ratioH + 'px';
+            input_address.style.marginLeft = -80 * ratioH + 'px';
+            input_address.style.marginTop  = -75 * ratioH + 'px';
+            input_address.style.fontSize   = 24 * ratioH + 'px';
+
+            var input_code              = document.getElementById('input_code');
+            input_code.style.width      = 260 * ratioH + 'px';
+            input_code.style.height     = 35 * ratioH + 'px';
+            input_code.style.marginLeft = -80 * ratioH + 'px';
+            input_code.style.marginTop  = -24 * ratioH + 'px';
+            input_code.style.fontSize   = 24 * ratioH + 'px';
+
+            var input_phone              = document.getElementById('input_phone');
+            input_phone.style.width      = 260 * ratioH + 'px';
+            input_phone.style.height     = 35 * ratioH + 'px';
+            input_phone.style.marginLeft = -80 * ratioH + 'px';
+            input_phone.style.marginTop  = 29 * ratioH + 'px';
+            input_phone.style.fontSize   = 24 * ratioH + 'px';
+
+            var input = document.getElementById('input');
+            input.appendChild(input_bg);
+            input.appendChild(input_button_confirm);
+            input.appendChild(input_button_give_up);
+
+            input.style.display = 'block';
+
+            input_button_give_up.addEventListener('touchstart', function(event) {
+                event.preventDefault();
+                document.getElementById('input_bg').remove();
+                document.getElementById('input_button_confirm').remove();
+                document.getElementById('input_button_give_up').remove();
+                document.getElementById('input').style.display = 'none';
+            }, true);
+
+            input_button_confirm.addEventListener('touchstart', function(event) {
+                event.preventDefault();
+                game.pressInputConfirmButtonCallback();
+            }, true);
+        },
+
+        //点击表单层确认按钮回调
+        pressInputConfirmButtonCallback: function() {
+            var name    = document.getElementById('input_name').value;
+            var address = document.getElementById('input_address').value;
+            var code    = document.getElementById('input_code').value;
+            var phone   = document.getElementById('input_phone').value;
+            console.log(name, address, code, phone);
+            if (true) {
+                document.getElementById('input_bg').remove();
+                document.getElementById('input_button_confirm').remove();
+                document.getElementById('input_button_give_up').remove();
+                document.getElementById('input').style.display = 'none';
+            }
+        },
+
+        zoomEndCallback: function() {
+            console.log('zoom end');
+                        game.resetCatchRange();
+                        game.updateUserLocation({long: game.lng, lat: game.lat});
+                        game.updateOtherUserLocation();
+                        game.updateBird();
+        },
+
+        moveEndCallback: function() {
+            console.log('move end');
+                        game.updateOtherUserLocation();
+                        game.updateBird();
+        },
+
+        scaleFinishCallback: function(scale) {
+            console.log(scale);
+
+            if (scale > 1.5) {
+                this.map.map.zoomBy(1);
+            } else if (scale < 0.6) {
+                this.map.map.zoomBy(-1);
+            }
+
+        },
+        //获取全部覆盖层数组
+        getOverlayArr:function () {
+            var overlayAll = [];
+            var user={
+                "lat":this.lat,
+                "long":this.lng,
+                "key":this.key,
+                "type":this.gameSex
+            }
+            overlayAll = overlayAll.concat(this.otherUserArr);
+            overlayAll = overlayAll.concat(this.birdArr);
+            overlayAll.push(user);
+            return overlayAll;
+        }
+    };
+
+
+    var game = new Game();
+
+    if (window.DeviceOrientationEvent) {//返回一个DeviceOrientationEvent对象
+        window.addEventListener('deviceorientation', DeviceOrientationHandler, false);///添加监听事件
+    }
+
+    function DeviceOrientationHandler(event) {
+        var alpha = event.alpha; //Z轴方向
+        if (alpha != null) {
+            game.compassAngle = Math.floor(alpha);
+        }
+    }
+
+</script>
+
+
+<script src="frameworks/cocos2d-html5/CCBoot.js"></script>
+<script cocos src="main.js"></script>
+<script src="js/loader.js"></script>
+
+</body>
+</html>
