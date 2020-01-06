@@ -196,14 +196,14 @@ Touch.prototype={
                             //将头像上传都七牛云
                             $("#page_13").css("display","block");
                             $(".photo_2").css("display","block");
-                            _this.getToken(function () {
+                            /*_this.getToken(function () {*/
                                 $("#page_13").css("display","none");
                                 $(".photo_2").css("display","none");
                                 $("#startDraw").css("display","block");
                                 $("#page_3").css("display","none");
                                 $("#page_7").css("display","block");
                                 _this.intoVideo=true;
-                            });
+                           /* });*/
                         }
 
                     })();break;
@@ -225,7 +225,7 @@ Touch.prototype={
                         //将base64格式图片转化成文件上传到七牛云
                         $("#page_13").css("display","block");
                         $(".photo_2").css("display","block");
-                        _this.getToken(function () {
+                       /* _this.getToken(function () {*/
                             $("#page_13").css("display","none");
                             $(".photo_2").css("display","none");
                             $("#startDraw").css("display","block");
@@ -233,7 +233,7 @@ Touch.prototype={
                             $("#page_8").css("display","block");
                             $(".drawPhoto").attr("src",_this.base64);//将画好的图片替换原来图片
                             _this.intoVideo=true;
-                        });
+                       /* });*/
                     })();break;
                     //去上传头像
                     case "toPhoto":(function () {playBut();$(".inputImage").css("display","block");
