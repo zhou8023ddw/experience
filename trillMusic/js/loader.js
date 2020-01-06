@@ -37,7 +37,6 @@ Game.prototype = {
 	loadFinishCallback: function () {
 		var _this=this;
 		console.log('加载完成');
-		alert('2');
         this.sound = new Sound(this.baseUrl, ['music_bg','effect_true','effect_false']);
         this.sound.initSound();
         this.sound.audios['music_bg'].autoplay = true;
