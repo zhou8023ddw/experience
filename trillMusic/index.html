@@ -176,7 +176,7 @@
 </div>
 <script src="js/Stage.js"></script>
 <script>
-    var fr = '<?php echo $fr; ?>' || '0';
+    var fr = '';
     //记录进入次数
     var game_times = window.localStorage.getItem('tttang_trill_music_game_times');
     if(!game_times){
@@ -190,7 +190,7 @@
         appName : 'trill_music',
         baseUrl : '',
         baseLink: 'http://test.tttang.net/zhoulejie/trillMusic/',
-        para    : '<?php echo $fr; ?>' ? ('?fr=' + fr) :''
+        para    : '' ? ('?fr=' + fr) :''
     };
     //手机适配问题
     var width = window.innerWidth;
@@ -214,7 +214,7 @@
 <script>
     //分享设置
     var wxConfig = {
-        debug:true,
+        debug:false,
         appId: '',
         timestamp: '',
         nonceStr: '',
