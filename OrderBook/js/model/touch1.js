@@ -181,7 +181,7 @@ var touch = function() {
                 if (times <= endtime*1000) {
                     var time = Math.ceil(times / 1000);
                     //三道线
-                    $("#three"+num+"").attr("src",game.baseUrl+"css/img/zhen/three_"+time%4+".png") ;
+                    $("#three"+num+"").attr("src",game.baseUrl+"img/zhen/three_"+time%4+".png") ;
 
                     $("#tiao" + num + "").css("width", (tiaowidth * time / endtime));
                     if(time<10){
@@ -280,7 +280,7 @@ var touch = function() {
                 if (times <= 60*1000) {
                     var time = Math.ceil(times / 1000);
                     //变换音符
-                    $("#music").attr("src","img/zhen/voice_"+(Math.ceil(times / 200)%3+1)+".png");
+                    $("#music").attr("src","css/img/zhen/voice_"+(Math.ceil(times / 200)%3+1)+".png");
                     if(time<10){
                         time="0"+time;
                     }
