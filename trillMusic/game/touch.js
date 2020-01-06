@@ -149,11 +149,11 @@ Touch.prototype={
                 _this.init();
                 game_times = Number(game_times)+1;
                 window.localStorage.setItem('tttang_trill_music_game_times',game_times);
-                game_times >= 2 && game.log(h5_config.appName+'_replay_game',{'times':game_times});
-                game.log(h5_config.appName+"_press_replay_game",{"times":game_times});//统计再玩一次的次数。
+                /*game_times >= 2 && game.log(h5_config.appName+'_replay_game',{'times':game_times});
+                game.log(h5_config.appName+"_press_replay_game",{"times":game_times});//统计再玩一次的次数。*/
             }else  if(className.indexOf('goTrillMusic')>=0){
                 console.log("跳转到抖音");
-                game.log(h5_config.appName + "_press_link");//统计跳转到抖音的次数
+                /*game.log(h5_config.appName + "_press_link");//统计跳转到抖音的次数*/
                 setTimeout(function(){
                     location.href = 'https://www.douyin.com/share/video/6410695623053413634?dl=kbEg';
                 },200)
@@ -174,15 +174,15 @@ Touch.prototype={
                 display:"block"
             });
             this.controlVideo();
-
-            game.log(h5_config.appName+"_question_"+(this.titleNum+1)+"_true");//统计每道题答对的人数
+/*
+            game.log(h5_config.appName+"_question_"+(this.titleNum+1)+"_true");//统计每道题答对的人数*/
         }else{
             //console.log('答错');
             video.skip();
             game.playEffect('effect_false');
             this.setAnswer();
 
-            game.log(h5_config.appName+"_question_"+(this.titleNum+1)+"_false");//统计每道题答错的人数
+            /*game.log(h5_config.appName+"_question_"+(this.titleNum+1)+"_false");//统计每道题答错的人数*/
         }
         this.titleNum++;
     },
@@ -212,7 +212,7 @@ Touch.prototype={
             this.initTwinkle('restart_2',20,0,3);
         }
 
-        game.log(h5_config.appName+"_pass_"+this.count);//统计每关通过的次数
+        //game.log(h5_config.appName+"_pass_"+this.count);//统计每关通过的次数
     },
     controlVideo:function () {
         $('.title_'+(this.titleNum)+'').css('display','none');

@@ -42,11 +42,11 @@ Game.prototype = {
         this.sound.audios['music_bg'].autoplay = true;
         this.sound.audios['music_bg'].loop     = true;
 
-        //添加统计
+       /* //添加统计
         game.log(h5_config.appName+"_init");//统计进入的总数
         game.log(h5_config.appName+"_init"+fr);//分渠道统计
 		// 如果不是第一次玩统计的次数
-        game_times>=2 && game.log(h5_config.appName+"_replay_game",{"times":game_times});
+        game_times>=2 && game.log(h5_config.appName+"_replay_game",{"times":game_times});*/
 
 		//加载视频
 		video = new Video('video', {
