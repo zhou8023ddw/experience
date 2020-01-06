@@ -181,7 +181,7 @@ var touch = function() {
                 if (times <= endtime*1000) {
                     var time = Math.ceil(times / 1000);
                     //三道线
-                    $("#three"+num+"").attr("src",game.baseUrl+"img/zhen/three_"+time%4+".png") ;
+                    $("#three"+num+"").attr("src",game.baseUrl+"css/img/zhen/three_"+time%4+".png") ;
 
                     $("#tiao" + num + "").css("width", (tiaowidth * time / endtime));
                     if(time<10){
